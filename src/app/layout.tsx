@@ -9,7 +9,6 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { AmbientCanvas } from '@/components/AmbientCanvas'
 
 export const metadata: Metadata = {
   title: 'Skylaria — Dự án bảo vệ môi trường',
@@ -24,7 +23,6 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body className="bg-[#060e08] text-white antialiased selection:bg-emerald-500/20 selection:text-emerald-300">
-        <AmbientCanvas />
         <Navbar />
         <main>{children}</main>
         <Footer />
@@ -32,3 +30,4 @@ export default function RootLayout({
     </html>
   )
 }
+
