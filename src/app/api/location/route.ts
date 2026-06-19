@@ -1,11 +1,7 @@
-/**
- * Author: Nguyễn Cao Quí (QuiNC)
- * Role: Lead Developer
- * Year: 2025-2026
- * Copyright © 2026 QuiNC. All rights reserved.
- */
-
 import { NextResponse } from 'next/server'
+
+// Force this route to run on Cloudflare's Edge Runtime (required for Pages/Workers)
+export const runtime = 'edge'
 
 export async function GET() {
   try {
