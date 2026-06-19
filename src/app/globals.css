@@ -1,1 +1,39 @@
 @import 'tailwindcss';
+
+/* Custom Scrollbar Styles - Auto-Hiding Minimalist */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(16, 185, 129, 0.08) transparent;
+}
+
+/* Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.08);
+  border-radius: 9999px;
+  transition: background-color 0.3s ease;
+}
+
+/* Make it slightly more visible when mouse is active in the window */
+html:hover ::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.25);
+}
+
+/* Highlight clearly when hovered directly */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.85) !important;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+

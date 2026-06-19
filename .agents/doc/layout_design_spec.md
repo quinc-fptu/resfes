@@ -21,8 +21,8 @@
 ## 🧭 Navbar
 
 ```
-[ Logo Skylaria ]   [ Trang chủ · Tái chế · Blog · Về chúng tôi ]     [ Khám phá → ]
-   (trái)                        (giữa)                                  (CTA phải)
+[ Logo Skylaria ]   [ Trang chủ · Tái chế · Blog · Về chúng tôi ]     
+   (trái)                        (giữa)                                  
 ```
 
 - **Sticky** — bám đầu khi scroll
@@ -49,44 +49,7 @@
 ```
 - Text lệch trái, orb animation floating bên phải
 - Particle canvas nền (subtle, 80 particles)
-- Eyebrow badge: `🌱 Dự án Skylaria · ResFes 2026`
 - Scroll indicator ở dưới
-
-### Stats Section
-```
-┌──────────┬──────────┬──────────┬──────────┐
-│  2.9M    │    7     │   27%    │  450 năm │  ← Amber glow, số to
-│  tấn/năm │ loại nhựa│ tái chế  │ PET phân │
-└──────────┴──────────┴──────────┴──────────┘
-```
-- Background: `#0d1a0e` (dark green khác trang chủ)
-- 4 stats, amber glow `text-shadow: 0 0 20px rgba(200,160,60,0.4)`
-- Counter animation khi scroll vào
-
-### Plastics Section — 7 loại nhựa
-```
-[ Tab bar: All · PET · HDPE · PVC · LDPE · PP · PS · Other ]
-┌─────────────────────────────────────────────────────────┐
-│  Content panel: thông tin chi tiết loại nhựa được chọn │
-│  Icon lớn · Tên · Mô tả · Reuse/Recycle badge          │
-└─────────────────────────────────────────────────────────┘
-```
-- 7 tabs ở trên, click chuyển content panel bên dưới
-- Panel animate fade khi chuyển tab
-
-### Why Section
-```
-┌─────────────────────┬──────────────────────┐
-│ H2 Tại sao quan     │                      │
-│ trọng?              │  [Illustration/Ảnh]  │
-│                     │       lớn            │
-│ • Bullet point 1    │                      │
-│ • Bullet point 2    │                      │
-│ • Bullet point 3    │                      │
-└─────────────────────┴──────────────────────┘
-```
-- Background: `#060e08` (trở về màu chính)
-- 2 cột: text trái, ảnh/illustration phải
 
 ### CTA Section
 ```
