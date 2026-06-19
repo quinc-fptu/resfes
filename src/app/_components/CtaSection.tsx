@@ -17,23 +17,23 @@ export default function CtaSection() {
     {
       href: '/recycle',
       icon: <PlayCircle size={32} weight="thin" className="text-emerald-400" />,
-      title: 'Xem video hướng dẫn',
-      desc: 'Kho lưu trữ video ngắn trực quan, hướng dẫn cụ thể từng bước tái chế tại nhà.',
-      cta: 'Xem video →'
+      title: 'Lorem Ipsum Dolor',
+      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.',
+      cta: 'Lorem Ipsum →'
     },
     {
       href: '/blog',
       icon: <Article size={32} weight="thin" className="text-emerald-400" />,
-      title: 'Đọc bài viết chia sẻ',
-      desc: 'Tổng hợp kiến thức sâu rộng về rác thải nhựa, môi trường và lối sống xanh bền vững.',
-      cta: 'Đọc bài →'
+      title: 'Consectetur Elit',
+      desc: 'Ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.',
+      cta: 'Dolor Sit →'
     },
     {
       href: '/about',
       icon: <Users size={32} weight="thin" className="text-emerald-400" />,
-      title: 'Về dự án Skylaria',
-      desc: 'Tìm hiểu về sứ mệnh, câu chuyện và đội ngũ phát triển đứng sau dự án ý nghĩa này.',
-      cta: 'Xem chi tiết →'
+      title: 'Adipiscing Tempor',
+      desc: 'Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum.',
+      cta: 'Amet Consectetur →'
     }
   ]
 

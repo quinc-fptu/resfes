@@ -45,23 +45,23 @@ export default function HeroSection() {
               variants={fadeUp}
               className="text-4xl md:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.08] text-white"
             >
-              Nhựa không phải{' '}
+              Lorem ipsum{' '}
               <span className="relative inline-block">
                 <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent">
-                  kẻ thù
+                  dolor sit
                 </span>
                 <span className="absolute bottom-1 left-0 w-full h-[3px] bg-gradient-to-r from-emerald-500/50 to-teal-500/0 rounded-full" />
               </span>
               {' '}—{' '}
               <br className="hidden md:inline" />
-              thiếu hiểu biết mới là.
+              consectetur elit.
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
               className="text-base md:text-lg text-white/70 leading-relaxed max-w-[55ch]"
             >
-              Skylaria giúp bạn nâng cao nhận thức, nhận diện chính xác và xử lý đúng cách các loại nhựa phổ biến trong cuộc sống hằng ngày.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </motion.p>
 
             <motion.div
@@ -74,7 +74,7 @@ export default function HeroSection() {
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm md:text-base rounded-full shadow-lg shadow-emerald-950/40 border border-emerald-400/20 transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95 touch-manipulation group"
                 style={{ minHeight: '44px' }}
               >
-                Khám phá video tái chế
+                Lorem Ipsum Dolor
                 <ArrowRight size={18} weight="bold" className="group-hover:translate-x-1 transition-transform duration-250" />
               </Link>
             </motion.div>

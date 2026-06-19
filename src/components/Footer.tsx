@@ -24,7 +24,7 @@ export default function Footer() {
               Skylaria
             </span>
             <p className="max-w-[32ch] leading-relaxed text-xs">
-              Nâng cao nhận thức cộng đồng và chia sẻ kiến thức hữu ích về tái chế rác thải nhựa tại Việt Nam.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ export default function Footer() {
 
           <div className="flex flex-col gap-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-              Kết nối với Skylaria
+              Lorem Ipsum Dolor
             </h4>
             <div className="flex items-center gap-3">
               <a
@@ -92,10 +92,10 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
           <div>
-            &copy; {new Date().getFullYear()} Skylaria. Đã đăng ký bản quyền.
+            &copy; {new Date().getFullYear()} Skylaria. Lorem ipsum sit.
           </div>
           <div>
-            Thiết kế & phát triển bởi <span className="text-white">QuiNC</span>.
+            Consectetur adipiscing elit.
           </div>
         </div>
       </div>
