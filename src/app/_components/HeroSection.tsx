@@ -1,10 +1,3 @@
-/**
- * Author: Nguyễn Cao Quí (QuiNC)
- * Role: Lead Developer
- * Year: 2025-2026
- * Copyright © 2026 QuiNC. All rights reserved.
- */
-
 'use client'
 
 import { motion } from 'framer-motion'
@@ -78,31 +71,45 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right: Glass Orb */}
+          {/* Right: Eco-Rings & Nested Orbits */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
             className="flex justify-center items-center relative"
           >
-            <div className="relative w-[300px] md:w-[380px] aspect-square flex items-center justify-center">
+            <div className="relative w-[300px] md:w-[400px] aspect-square flex items-center justify-center">
+              
+              {/* Outer Orbit (Dashed, slow clockwise spin) */}
+              <div className="absolute inset-0 rounded-full border border-dashed border-emerald-500/15 animate-[spin_40s_linear_infinite] pointer-events-none" />
+              
+              {/* Middle Orbit (Dashed, faster counter-clockwise spin) */}
+              <div className="absolute inset-[10%] rounded-full border border-dashed border-emerald-400/20 animate-[spin_25s_linear_infinite_reverse] pointer-events-none" />
+
+              {/* Glowing Particle Accents on Orbits */}
+              <div className="absolute top-[8%] left-[50%] -translate-x-1/2 w-2 h-2 rounded-full bg-emerald-400 blur-[1px] animate-pulse" />
+              <div className="absolute bottom-[20%] right-[10%] w-1.5 h-1.5 rounded-full bg-teal-400 blur-[1px] animate-pulse [animation-delay:1.5s]" />
+              <div className="absolute top-[30%] left-[5%] w-1.5 h-1.5 rounded-full bg-emerald-300 blur-[1px] animate-pulse [animation-delay:3s]" />
+
+              {/* Central Glassmorphic Core */}
               <motion.div
                 animate={{
-                  y: [0, -10, 0],
+                  y: [0, -8, 0],
                 }}
                 transition={{
-                  duration: 6,
+                  duration: 5,
                   repeat: Infinity,
                   ease: 'easeInOut'
                 }}
-                className="relative w-[60%] h-[60%] rounded-full bg-white/[0.01] border border-white/10 shadow-lg flex flex-col items-center justify-center gap-3 backdrop-blur-md"
+                className="relative w-[50%] h-[50%] rounded-full bg-white/[0.02] border border-white/10 shadow-[0_0_30px_rgba(16,185,129,0.05)] flex flex-col items-center justify-center gap-3 backdrop-blur-md z-10"
               >
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-emerald-500/5 to-transparent pointer-events-none" />
                 <Recycle
-                  size={48}
-                  weight="thin"
-                  className="text-emerald-400 animate-spin [animation-duration:40s]"
+                  size={44}
+                  weight="light"
+                  className="text-emerald-400 animate-[spin_30s_linear_infinite]"
                 />
-                <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-emerald-400/80 font-bold">
+                <span className="text-[10px] uppercase tracking-[0.25em] font-mono text-emerald-300 font-bold">
                   SKYLARIA
                 </span>
               </motion.div>
