@@ -145,5 +145,5 @@ Phase 4 — Polish & Deploy
   → Animation, hover effects, micro-interactions
   → Mobile responsive toàn site
   → SEO: meta tags, OG image, sitemap
-  → Deploy lên Vercel
+  → Deploy lên Cloudflare
 ```
