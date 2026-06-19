@@ -224,8 +224,7 @@ export function AmbientCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 -z-10 pointer-events-none block h-full w-full"
-      style={{ mixBlendMode: 'screen' }}
+      className="fixed inset-0 -z-10 pointer-events-none block h-full w-full mix-blend-screen"
     />
   )
 }

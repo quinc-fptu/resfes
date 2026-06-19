@@ -21,8 +21,7 @@ export default function HeroSection() {
       {/* Immersive Glowing Background Blobs */}
       <div
         aria-hidden="true"
-        className="absolute top-[-10%] right-[-10%] w-[clamp(450px,60vw,900px)] aspect-square rounded-full bg-[radial-gradient(circle_at_center,rgba(52,211,153,0.04)_0%,transparent_60%)] pointer-events-none blur-[40px] animate-pulse"
-        style={{ animationDuration: '8s' }}
+        className="absolute top-[-10%] right-[-10%] w-[clamp(450px,60vw,900px)] aspect-square rounded-full bg-[radial-gradient(circle_at_center,rgba(52,211,153,0.04)_0%,transparent_60%)] pointer-events-none blur-[40px] animate-pulse [animation-duration:8s]"
       />
 
       {/* Decorative Grid Mesh */}
@@ -71,8 +70,7 @@ export default function HeroSection() {
               <Link
                 href="/recycle"
                 id="hero-cta-primary"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm md:text-base rounded-full shadow-lg shadow-emerald-950/40 border border-emerald-400/20 transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95 touch-manipulation group"
-                style={{ minHeight: '44px' }}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm md:text-base rounded-full shadow-lg shadow-emerald-950/40 border border-emerald-400/20 transition-all duration-300 hover:-translate-y-1 active:translate-y-0 active:scale-95 touch-manipulation group min-h-[44px]"
               >
                 Lorem Ipsum Dolor
                 <ArrowRight size={18} weight="bold" className="group-hover:translate-x-1 transition-transform duration-250" />
@@ -102,8 +100,7 @@ export default function HeroSection() {
                 <Recycle
                   size={48}
                   weight="thin"
-                  className="text-emerald-400 animate-spin"
-                  style={{ animationDuration: '40s' }}
+                  className="text-emerald-400 animate-spin [animation-duration:40s]"
                 />
                 <span className="text-[10px] uppercase tracking-[0.2em] font-mono text-emerald-400/80 font-bold">
                   SKYLARIA
