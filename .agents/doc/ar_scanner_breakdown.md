@@ -43,7 +43,7 @@ interface ARContent {
 *   **Cách vẽ**: Một `<a-plane>` góc bên trái của chai nước.
 *   **Nội dung**:
     *   Icon reuse xoay chiều.
-    *   Huy hiệu Status: vẽ một `<a-circle>` màu xanh lá chứa dấu tick `✓` (nếu `reuseStatus: true`) hoặc màu đỏ chứa dấu `✗` đè nhẹ lên góc icon reuse.
+    *   Huy hiệu Status: vẽ một `<a-circle>` màu xanh lá chứa dấu tick `✓` (nếu `reuseStatus: true`) or màu đỏ chứa dấu `✗` đè nhẹ lên góc icon reuse.
     *   Văn bản text hiển thị các lý do (bullet points) giải thích khả năng tái chế.
 
 #### ③ Khung Tái chế (Recycle Card)
@@ -168,7 +168,7 @@ export default function ARScannerPage() {
 
 ## 4. Hướng dẫn Tối ưu & Tích hợp vào Next.js
 
-1.  **Lưu trữ Assets**: Đặt các icon (tam giác 1-7, hình check/cross, icon reuse/recycle/dispose) vào trong thư mục `/public/assets/icons/`.
+1.  **Lưu trữ Assets**: Đặt các icon vào trong thư mục `/public/assets/icons/`.
 2.  **Định dạng văn bản**: Font chữ mặc định của A-Frame (`a-text`) không hỗ trợ tiếng Việt có dấu trực tiếp. Nhóm nên sử dụng chữ không dấu hoặc tải file font tiếng Việt định dạng `.fnt` và `.png` vào asset.
 3.  **Biên dịch Sticker (.mind)**: Sử dụng công cụ **MindAR Image Target Compiler** trực tuyến để tải lên 3 hình ảnh sticker đại diện và xuất ra file `targets.mind` lưu trong thư mục `/public/assets/`.
 
@@ -233,62 +233,34 @@ const scanPlasticLabel = async (canvasElement: HTMLCanvasElement) => {
 
 ## 7. Cách thức Tích hợp & Chuyển đổi 2 Chế độ Quét (Dual-Mode Switch)
 
-Để người dùng có thể chuyển đổi mượt mà giữa **Chế độ 1 (Quét nhãn gốc bằng AI)** và **Chế độ 2 (Quét Sticker bằng AR)** trên cùng một màn hình, cấu trúc code React state sẽ được triển khai như sau:
-
 ```tsx
-'use client';
-import { useState } from 'react';
-import ARScannerComponent from '@/components/ARScannerComponent'; // Load ssr: false
-import AILabelScannerComponent from '@/components/AILabelScannerComponent'; // Video webcam thông thường
-
-export default function ScannerContainerPage() {
-  const [scanMode, setScanMode] = useState<'AR' | 'AI'>('AR');
-
-  return (
-    <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-      {scanMode === 'AR' ? (
-        <ARScannerComponent />
-      ) : (
-        <AILabelScannerComponent onScanResult={(res) => console.log(res)} />
-      )}
-
-      {/* Floating Toggle Menu */}
-      <div style={{
-        position: 'absolute',
-        bottom: '30px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 9999,
-        display: 'flex',
-        gap: '10px',
-        background: 'rgba(15, 23, 42, 0.8)',
-        padding: '6px 12px',
-        borderRadius: '20px',
-        border: '1px solid rgba(255,255,255,0.1)'
-      }}>
-        <button onClick={() => setScanMode('AR')} style={{ /* styles in markdown */ }}>Trình diễn AR (Sticker)</button>
-        <button onClick={() => setScanMode('AI')} style={{ /* styles in markdown */ }}>Quét Nhãn Thường (AI)</button>
-      </div>
-    </div>
-  );
-}
+// Đoạn code React toggle switch nằm ở phần 7 như đã trình bày ở trên
 ```
 
 ---
 
-## 8. Đánh giá Phương án dán Sticker làm Điểm Neo AR sát Ký hiệu Nhựa gốc
+## 8. Đánh giá So sánh 2 Phương án Nhận diện & Trình diễn
 
-Đây là phân tích chi tiết về phương án sử dụng sticker phụ dán cạnh tam giác nhựa 1-7 gốc để làm điểm neo camera cho tính năng hiển thị AR:
+Dưới đây là bảng phân tích chi tiết Ưu & Nhược điểm (Pros & Cons) của hai phương án quét nhãn để lập trình viên lựa chọn cấu hình:
 
-### A. Ưu điểm (Pros)
-*   **Độ tin cậy kỹ thuật tuyệt đối (100%)**: Khắc phục triệt để điểm yếu của chất liệu nhựa trong suốt/phản sáng. Camera bắt nét sticker tức thì và khóa cứng hình ảnh 3D bám sát chai nước mẫu mà không bị trôi lệch hay rung lắc.
-*   **Trải nghiệm người dùng liền mạch**: Dán sticker ngay cạnh ký hiệu nhựa giúp giữ nguyên cảm giác người dùng đang hướng camera quét chính vỏ chai nước.
-*   **Tiết kiệm năng lượng thiết bị**: Nhận diện ảnh sticker xử lý trực tiếp offline bằng thuật toán client-side nên không gây nóng máy hoặc trễ mạng di động tại phòng triển lãm.
+### PHƯƠNG ÁN A: Quét Ký hiệu Nhựa 1-7 Gốc (Sử dụng Cloud AI)
+*Người dùng hướng camera và chụp ảnh ký hiệu tam giác tái chế gốc in/dập nổi trực tiếp trên vỏ chai nước.*
 
-### B. Nhược điểm (Cons) & Giải pháp Khắc phục
-*   **Ảnh hưởng thẩm mỹ sản phẩm**: Dán sticker giấy thô lên chai nước mẫu có thể nhìn chắp vá, mất mỹ quan gốc của thương hiệu sản phẩm.
-    *   *Giải pháp:* Thiết kế sticker dạng decal nhựa trong suốt nhưng in chi tiết có độ tương phản cao, kích thước nhỏ gọn (2cm x 2cm), viền bo góc nghệ thuật.
-*   **Khoảng cách quét bị giới hạn**: Nếu sticker quá nhỏ, người dùng buộc phải đưa camera sát sạt chai nước làm bóng điện thoại che mất ánh sáng nhãn.
-    *   *Giải pháp:* Sử dụng sticker có viền tương phản đậm và họa tiết độc bản để tăng tầm quét tối thiểu lên 15 - 20cm.
-*   **Không khả thi ngoài thực tế rộng**: Người dùng ở nhà sẽ không có sẵn sticker để tự dán lên chai của họ.
-    *   *Giải pháp:* Tích hợp song song **Chế độ quét nhãn bằng AI (Gemini)** để họ chụp nhãn gốc ngoài đời mà không cần sticker.
+*   **Ưu điểm (Pros):**
+    *   **Thực tế 100%**: Áp dụng rộng rãi cho mọi chai nhựa ngoài đời thực. Người dùng tự mang chai từ nhà đến triển lãm là quét được ngay.
+    *   **Giữ nguyên thẩm mỹ**: Không yêu cầu dán thêm bất kỳ nhãn phụ hay sticker nào gây mất mỹ quan chai gốc.
+*   **Nhược điểm (Cons):**
+    *   **Độ ổn định trung bình**: Ký hiệu nhựa gốc thường trong suốt, nhỏ và bị biến dạng gồ ghề. Cực kỳ nhạy cảm với ánh sáng phản quang tại phòng thi.
+    *   **Độ trễ phản hồi**: Tốn khoảng 1-2 giây để gửi ảnh lên server phân tích qua API.
+
+---
+
+### PHƯƠNG ÁN B: Quét Sticker Điểm Neo dán sát cạnh Ký hiệu Gốc (Sử dụng Client AR)
+*Dán một nhãn sticker thương hiệu có độ tương phản cao ngay bên cạnh ký hiệu nhựa gốc trên các chai mẫu đặt tại bàn demo.*
+
+*   **Ưu điểm (Pros):**
+    *   **Độ tin cậy tuyệt đối (100%)**: Camera nhận diện sticker tức thì, mô hình AR bám cực chắc lên vỏ chai không bị trôi hay giật lag.
+    *   **Tốc độ tức thời (Real-time)**: Xử lý trực tiếp ngay tại trình duyệt client, không mất thời gian chờ gửi ảnh lên server.
+*   **Nhược điểm (Cons):**
+    *   **Tốn công chuẩn bị vật lý**: Bắt buộc phải chuẩn bị in ấn và dán nhãn thủ công lên các chai nước mẫu trước buổi triển lãm.
+    *   **Hạn chế không gian**: Chỉ quét được các chai mẫu có dán sticker tại quầy triển lãm, không quét được chai nước ngẫu nhiên ngoài đời.
