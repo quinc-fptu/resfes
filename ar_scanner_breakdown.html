@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế hoạch Trải nghiệm Tương tác AR & Nhận Diện Nhãn - Skylaria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --primary-green: #10b981;
+            --accent-blue: #3b82f6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 2px 0;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 18px;
+            margin-bottom: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            font-size: 1rem;
+            color: var(--primary-green);
+            border-bottom: 2px solid rgba(16, 185, 129, 0.2);
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        p, li {
+            color: #cbd5e1;
+            font-size: 0.8rem;
+        }
+
+        /* Dual Scan Grid */
+        .option-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .option-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px 12px;
+        }
+
+        .option-title {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .option-title.green { color: var(--primary-green); }
+        .option-title.blue { color: var(--accent-blue); }
+
+        .option-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            font-size: 0.65rem;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+
+        .option-badge.green {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary-green);
+        }
+
+        /* AR UI elements */
+        .ar-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .ar-item {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .ar-item h3 {
+            margin: 0 0 3px 0;
+            font-size: 0.8rem;
+            color: #fff;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .ar-tag {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            font-size: 0.65rem;
+            padding: 1px 3px;
+            border-radius: 2px;
+        }
+
+        .ar-item p {
+            margin: 0;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            line-height: 1.2;
+        }
+
+        /* Client Copy Area */
+        .copy-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px dashed var(--primary-green);
+            padding: 10px;
+            border-radius: 6px;
+            position: relative;
+            margin-top: 8px;
+        }
+
+        .copy-box::before {
+            content: "TIN NHẮN XÁC NHẬN GỬI KHÁCH HÀNG / ĐỐI TÁC";
+            position: absolute;
+            top: -8px;
+            left: 12px;
+            background: var(--primary-green);
+            color: #000;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 1px 4px;
+            border-radius: 2px;
+        }
+
+        .copy-text {
+            font-family: inherit;
+            white-space: pre-wrap;
+            color: #e2e8f0;
+            margin: 0;
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .btn-copy {
+            background: var(--primary-green);
+            color: #0f172a;
+            border: none;
+            padding: 4px 8px;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 6px 0 0 auto;
+            transition: all 0.2s ease;
+            font-size: 0.75rem;
+        }
+
+        /* Flow steps horizontal grid */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .flow-step {
+            background: rgba(15, 23, 42, 0.4);
+            padding: 8px;
+            border-radius: 6px;
+            border-top: 2px solid var(--primary-green);
+            text-align: center;
+        }
+
+        .flow-num {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 2px;
+        }
+
+        .flow-step h4 {
+            margin: 0 0 2px 0;
+            color: #fff;
+            font-size: 0.75rem;
+        }
+
+        .flow-step p {
+            margin: 0;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            line-height: 1.2;
+        }
+
+        /* Print setup to guarantee 1 page A4 */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                padding: 0 !important;
+                margin: 0 !important;
+                background-color: #0f172a !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .section {
+                padding: 10px 12px !important;
+                margin-bottom: 8px !important;
+                background: rgba(30, 41, 59, 0.95) !important;
+            }
+            h2 {
+                font-size: 0.85rem !important;
+                margin-bottom: 4px !important;
+            }
+            .option-grid, .ar-grid, .flow-grid {
+                gap: 6px !important;
+            }
+            .option-card, .ar-item, .flow-step {
+                padding: 6px 8px !important;
+            }
+            p, li, .flow-step p, .ar-item p, .option-card p {
+                font-size: 0.7rem !important;
+            }
+            .copy-box {
+                padding: 6px 8px !important;
+            }
+            .copy-text {
+                font-size: 0.7rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>KẾ HOẠCH TRẢI NGHIỆM TƯƠNG TÁC AR & NHẬN DIỆN</h1>
+        <div class="subtitle">Dự án Skylaria - Triển lãm Môi trường ResFes</div>
+    </header>
+
+    <!-- SECTION 1: LỰA CHỌN PHƯƠNG ÁN QUÉT -->
+    <div class="section">
+        <h2>1. Tích Hợp Hệ Thống Quét Kép (Hỗ Trợ Cả 2 Chế Độ)</h2>
+        <div class="option-grid">
+            <!-- Chế độ 1 -->
+            <div class="option-card">
+                <div class="option-title blue">
+                    Chế độ 1: Nhận diện Nhãn Tái Chế Gốc
+                    <span class="option-badge">Dùng hàng ngày</span>
+                </div>
+                <p style="margin: 0 0 6px 0; color: #cbd5e1;">Quét mã tam giác nhựa 1-7 in sẵn trên vỏ chai bất kỳ bằng camera để kiểm tra thông tin nhanh.</p>
+                <ul style="margin: 0; padding-left: 12px; font-size: 0.75rem; color: #94a3b8;">
+                    <li><strong>Tính thực tế:</strong> Cực kỳ cao, người dùng tự mang chai nước từ nhà đến là quét được ngay.</li>
+                    <li><strong>Mục tiêu:</strong> Giáo dục cộng đồng cách phân loại rác tiện lợi tại nhà.</li>
+                </ul>
+            </div>
+            <!-- Chế độ 2 -->
+            <div class="option-card">
+                <div class="option-title green">
+                    Chế độ 2: Trình diễn Tương tác AR
+                    <span class="option-badge green">Demo tại Quầy Triển Lãm</span>
+                </div>
+                <p style="margin: 0 0 6px 0; color: #cbd5e1;">Quét sticker thương hiệu thiết kế riêng dán sẵn trên 3 chai nước mẫu đặt tại quầy thuyết trình.</p>
+                <ul style="margin: 0; padding-left: 12px; font-size: 0.75rem; color: #94a3b8;">
+                    <li><strong>Hiệu ứng trình diễn:</strong> Hiển thị mô hình 3D mầm cây sinh động, mượt mà và cực kỳ vững chắc.</li>
+                    <li><strong>Mục tiêu:</strong> Tạo điểm nhấn công nghệ thu hút và thuyết phục Ban giám khảo.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: GỬI TIN NHẮN XÁC NHẬN -->
+    <div class="section no-print">
+        <h2>2. Tin Nhắn Gửi Khách Hàng (Xác nhận Giao diện AR & Hệ thống Quét)</h2>
+        <div class="copy-box">
+            <pre class="copy-text" id="clientText">Dạ, nhóm em đã xây dựng chi tiết kịch bản hệ thống Quét kép kết hợp tương tác AR. Khách/Thầy cô xem các chế độ quét dưới đây đã đúng định hướng chưa ạ:
+
+[HỆ THỐNG QUÉT KÉP TÍCH HỢP]:
+- Chế độ 1 (Quét thực tế): Nhận diện nhãn gốc (Người dùng hướng camera quét ký hiệu tam giác số 1-7 in trên chai nước bất kỳ).
+- Chế độ 2 (Demo tại triển lãm): Trình diễn AR (Quét sticker thương hiệu riêng dán trên chai mẫu của nhóm, hiển thị mô hình tương tác 3D mượt mà, không rung lắc).
+
+[KỊCH BẢN GIAO DIỆN HIỂN THỊ AR]:
+1. KHUNG LOẠI NHỰA: Biểu tượng loại nhựa (PET, HDPE...) và thông tin căn bản (tên, thời gian phân hủy).
+2. KHUNG TÁI SỬ DỤNG: Icon tái sử dụng đè dấu [✓] hoặc [X] kèm gạch đầu dòng giải thích lý do an toàn.
+3. KHUNG TÁI CHẾ: Icon tái chế đè dấu [✓]/[X] kèm hàng ngang hình vuông nhỏ ảnh sản phẩm tái chế DIY mẫu.
+4. KHUNG VỨT BỎ: Icon bỏ rác và hướng dẫn xử lý chai đúng cách (rửa sạch, bóp dẹp).
+5. NÚT TÌM HIỂU THÊM: Nút ảo dẫn tiếp sang trang cẩm nang kiến thức chi tiết.</pre>
+        </div>
+        <button class="btn-copy" onclick="copyContent()">Sao chép tin nhắn</button>
+    </div>
+
+    <!-- SECTION 3: CHI TIẾT GIAO DIỆN AR -->
+    <div class="section">
+        <h2>3. Mô Tả 5 Cấu Phần Hiển Thị Trực Quan Trên Màn Hình AR</h2>
+        <div class="ar-grid">
+            <div class="ar-item">
+                <h3><span class="ar-tag">01</span> Khung Loại Nhựa</h3>
+                <p>Hiển thị mã nhựa và thời gian phân hủy tự nhiên.</p>
+            </div>
+            <div class="ar-item">
+                <h3><span class="ar-tag">02</span> Khung Tái Sử Dụng</h3>
+                <p>Huy hiệu trạng thái [✓]/[X] kèm lời khuyên sức khỏe.</p>
+            </div>
+            <div class="ar-item">
+                <h3><span class="ar-tag">03</span> Khung Tái Chế</h3>
+                <p>Danh sách ngang các ô hình ảnh sản phẩm tái chế mẫu.</p>
+            </div>
+            <div class="ar-item">
+                <h3><span class="ar-tag">04</span> Khung Vứt Bỏ</h3>
+                <p>Chỉ dẫn xử lý nhanh (rửa sạch, bóp xẹp chai) trước khi bỏ.</p>
+            </div>
+            <div class="ar-item">
+                <h3><span class="ar-tag">05</span> Nút Tìm Hiểu</h3>
+                <p>Nút ảo liên kết trực tiếp tới cẩm nang kiến thức.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: QUY TRÌNH -->
+    <div class="section">
+        <h2>4. Quy Trình Trải Nghiệm (4 Bước Thực Tế)</h2>
+        <div class="flow-grid">
+            <div class="flow-step">
+                <div class="flow-num">01</div>
+                <h4>Quét mã QR</h4>
+                <p>Mở web quét bằng điện thoại.</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">02</div>
+                <h4>Nhận diện</h4>
+                <p>Hướng camera vào chai mẫu/nhãn gốc.</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">03</div>
+                <h4>Hiển thị AR</h4>
+                <p>5 khung thông tin hiện quanh chai.</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">04</div>
+                <h4>Xem chi tiết</h4>
+                <p>Bấm nút ảo để sang trang cẩm nang.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyContent() {
+        var text = document.getElementById("clientText").innerText;
+        navigator.clipboard.writeText(text).then(function() {
+            alert("Đã sao chép nội dung thành công!");
+        }, function(err) {
+            alert("Không thể tự động sao chép. Vui lòng bôi đen và copy thủ công.");
+        });
+    }
+</script>
+
+</body>
+</html>
