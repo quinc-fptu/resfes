@@ -242,26 +242,23 @@ import ARScannerComponent from '@/components/ARScannerComponent'; // Load ssr: f
 import AILabelScannerComponent from '@/components/AILabelScannerComponent'; // Video webcam thông thường
 
 export default function ScannerContainerPage() {
-  // State quản lý chế độ quét hiện tại
   const [scanMode, setScanMode] = useState<'AR' | 'AI'>('AR');
 
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-      
-      {/* 1. Phần render Camera tương ứng với Chế độ chọn */}
       {scanMode === 'AR' ? (
         <ARScannerComponent />
       ) : (
         <AILabelScannerComponent onScanResult={(res) => console.log(res)} />
       )}
 
-      {/* 2. Thanh Menu nổi (Floating Toggle Menu) để chuyển đổi chế độ */}
+      {/* Floating Toggle Menu */}
       <div style={{
         position: 'absolute',
         bottom: '30px',
         left: '50%',
         transform: 'translateX(-50%)',
-        zIndex: 9999, // Đảm bảo nổi lên trên A-Frame scene
+        zIndex: 9999,
         display: 'flex',
         gap: '10px',
         background: 'rgba(15, 23, 42, 0.8)',
@@ -269,39 +266,29 @@ export default function ScannerContainerPage() {
         borderRadius: '20px',
         border: '1px solid rgba(255,255,255,0.1)'
       }}>
-        <button 
-          onClick={() => setScanMode('AR')}
-          style={{
-            padding: '8px 16px',
-            borderRadius: '15px',
-            border: 'none',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            fontSize: '12px',
-            background: scanMode === 'AR' ? '#10b981' : 'transparent',
-            color: scanMode === 'AR' ? '#0f172a' : '#94a3b8'
-          }}
-        >
-          Trình diễn AR (Sticker)
-        </button>
-        <button 
-          onClick={() => setScanMode('AI')}
-          style={{
-            padding: '8px 16px',
-            borderRadius: '15px',
-            border: 'none',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            fontSize: '12px',
-            background: scanMode === 'AI' ? '#10b981' : 'transparent',
-            color: scanMode === 'AI' ? '#0f172a' : '#94a3b8'
-          }}
-        >
-          Quét Nhãn Thường (AI)
-        </button>
+        <button onClick={() => setScanMode('AR')} style={{ /* styles in markdown */ }}>Trình diễn AR (Sticker)</button>
+        <button onClick={() => setScanMode('AI')} style={{ /* styles in markdown */ }}>Quét Nhãn Thường (AI)</button>
       </div>
     </div>
   );
 }
 ```
-*Giao diện chuyển đổi (Toggle) sẽ hiển thị dưới dạng menu bo góc, kính mờ lơ lửng ở đáy màn hình, người dùng chạm vào nút nào thì Next.js sẽ tự động chuyển đổi camera và thuật toán xử lý tương ứng.*
+
+---
+
+## 8. Đánh giá Phương án dán Sticker làm Điểm Neo AR sát Ký hiệu Nhựa gốc
+
+Đây là phân tích chi tiết về phương án sử dụng sticker phụ dán cạnh tam giác nhựa 1-7 gốc để làm điểm neo camera cho tính năng hiển thị AR:
+
+### A. Ưu điểm (Pros)
+*   **Độ tin cậy kỹ thuật tuyệt đối (100%)**: Khắc phục triệt để điểm yếu của chất liệu nhựa trong suốt/phản sáng. Camera bắt nét sticker tức thì và khóa cứng hình ảnh 3D bám sát chai nước mẫu mà không bị trôi lệch hay rung lắc.
+*   **Trải nghiệm người dùng liền mạch**: Dán sticker ngay cạnh ký hiệu nhựa giúp giữ nguyên cảm giác người dùng đang hướng camera quét chính vỏ chai nước.
+*   **Tiết kiệm năng lượng thiết bị**: Nhận diện ảnh sticker xử lý trực tiếp offline bằng thuật toán client-side nên không gây nóng máy hoặc trễ mạng di động tại phòng triển lãm.
+
+### B. Nhược điểm (Cons) & Giải pháp Khắc phục
+*   **Ảnh hưởng thẩm mỹ sản phẩm**: Dán sticker giấy thô lên chai nước mẫu có thể nhìn chắp vá, mất mỹ quan gốc của thương hiệu sản phẩm.
+    *   *Giải pháp:* Thiết kế sticker dạng decal nhựa trong suốt nhưng in chi tiết có độ tương phản cao, kích thước nhỏ gọn (2cm x 2cm), viền bo góc nghệ thuật.
+*   **Khoảng cách quét bị giới hạn**: Nếu sticker quá nhỏ, người dùng buộc phải đưa camera sát sạt chai nước làm bóng điện thoại che mất ánh sáng nhãn.
+    *   *Giải pháp:* Sử dụng sticker có viền tương phản đậm và họa tiết độc bản để tăng tầm quét tối thiểu lên 15 - 20cm.
+*   **Không khả thi ngoài thực tế rộng**: Người dùng ở nhà sẽ không có sẵn sticker để tự dán lên chai của họ.
+    *   *Giải pháp:* Tích hợp song song **Chế độ quét nhãn bằng AI (Gemini)** để họ chụp nhãn gốc ngoài đời mà không cần sticker.
